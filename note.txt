@@ -1,0 +1,8 @@
+1.  static and media files
+    https://testdriven.io/blog/django-static-files/
+
+2. Loggers
+    https://medium.com/@torkashvand/a-comprehensive-guide-to-logging-in-django-e041f311bcb7
+
+3.  Custom User Model 
+    https://testdriven.io/blog/django-custom-user-model/#:~:text=AbstractUser%20%3A%20Use%20this%20option%20if,own%2C%20completely%20new%20user%20model.
