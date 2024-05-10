@@ -6,3 +6,6 @@
 
 3.  Custom User Model 
     https://testdriven.io/blog/django-custom-user-model/#:~:text=AbstractUser%20%3A%20Use%20this%20option%20if,own%2C%20completely%20new%20user%20model.
+
+4.  Djoser
+    https://medium.com/@hellenwain_54279/securing-django-rest-user-apis-with-djoser-273275921343
