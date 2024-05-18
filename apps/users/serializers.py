@@ -14,7 +14,7 @@ class UserSerializer(serializers.ModelSerializer):
     profile_photo = serializers.ImageField(source="profile.profile_photo")
     country = CountryField(source="profile.country")
     city = serializers.CharField(source="profile.city")
-    top_seller = serializers.BooleanField(source="profile.top_seller")
+    # top_seller = serializers.BooleanField(source="profile.top_seller")
     first_name = serializers.SerializerMethodField()
     last_name = serializers.SerializerMethodField()
     full_name = serializers.SerializerMethodField(source="get_full_name")
@@ -24,13 +24,18 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ["id", "username", "email", "first_name", "last_name", 
                   "full_name", "gender", "phone_number", "profile_photo", 
-                  "country", "city", "top_seller"]
+                  "country", "city",
+                    # "top_seller"
+                    ]
     
     def get_first_name(self, obj):
         return obj.first_name.title()
     
     def get_last_name(self, obj):
         return obj.last_name.title()
+    
+    def get_full_name(self, obj):
+        return f"{obj.first_name.title()} {obj.last_name.title()}"
     
     def to_representation(self, instance):
         representation = super(UserSerializer, self).to_representation(instance)

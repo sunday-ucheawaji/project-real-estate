@@ -45,7 +45,9 @@ THIRD_PARTY_APPS = [
     "django_countries",
     "phonenumber_field",
     "djoser",
-    "rest_framework_simplejwt"
+    "rest_framework_simplejwt",
+    'drf_yasg',
+    
 ]
 
 LOCAL_APPS = [
@@ -141,6 +143,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "users.User"
 
+
+
+
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
@@ -156,8 +161,9 @@ SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=120),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
     "SIGNING_KEY": env("SIGNING_KEY"),
-    "AUTH_HEADER_NAME": "HTTP_AUUTHORIZATION",
-    "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken"),
+    "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
+    "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
+
 
 }
 
