@@ -9,3 +9,9 @@
 
 4.  Djoser
     https://medium.com/@hellenwain_54279/securing-django-rest-user-apis-with-djoser-273275921343
+
+5.  Http headers
+    https://budibase.com/blog/inside-it/api-headers/
+
+6.  CORS
+    https://aws.amazon.com/what-is/cross-origin-resource-sharing/#:~:text=Cross%2Dorigin%20resource%20sharing%20(CORS,resources%20in%20a%20different%20domain.

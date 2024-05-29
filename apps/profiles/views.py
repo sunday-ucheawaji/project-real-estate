@@ -26,7 +26,10 @@ class GetProfileAPIView(APIView):
 
     def get(self, request):
         user = self.request.user
-        user_profile = Profile.objects.get(user=user)
+        try:
+            user_profile = Profile.objects.get(user=user)
+        except Profile.DoesNotExist:
+            raise ProfileNotFound       
         serializer = ProfileSerializer(user_profile, context={"request": request})
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -38,7 +41,6 @@ class UpdateProfileAPIView(APIView):
 
     def patch(self, request, username):
         try:
-            print("username",username, request.user.username)
             Profile.objects.get(user__username=username)
         except Profile.DoesNotExist:
             raise ProfileNotFound
