@@ -48,6 +48,8 @@ THIRD_PARTY_APPS = [
     "rest_framework_simplejwt",
     'drf_yasg',
     "corsheaders",
+    'drf_spectacular',
+
 
 ]
 
@@ -157,7 +159,18 @@ CORS_ALLOW_CREDENTIALS = True
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
-    )
+    ),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+
+}
+
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Real Estate API",
+    "DESCRIPTION": "Real Estate API",
+    "VERSION": "1.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    "COMPONENT_SPLIT_REQUEST": True,
 }
 
 from datetime import timedelta
