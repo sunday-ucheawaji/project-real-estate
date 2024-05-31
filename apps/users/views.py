@@ -79,4 +79,3 @@ class UsersAPIView(generics.ListAPIView):
     def get_queryset(self):
         return User.objects.filter(is_superuser=True)
     
-    
