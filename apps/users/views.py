@@ -62,7 +62,6 @@ class RefreshJWTView(TokenRefreshView):
 
             refresh = RefreshToken(refresh_token)
             user = User.objects.get(id=refresh.payload.get("user_id"))
-            print("refresh>>", user)
             data = {"access": str(refresh.access_token)}
             if user.is_superuser == True:
                 data["roles"] = ["admin", "user"]

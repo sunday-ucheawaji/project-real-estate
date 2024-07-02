@@ -49,8 +49,6 @@ THIRD_PARTY_APPS = [
     'drf_yasg',
     "corsheaders",
     'drf_spectacular',
-
-
 ]
 
 LOCAL_APPS = [
@@ -167,7 +165,6 @@ REST_FRAMEWORK = {
 }
 
 # API Documentation
-
 SPECTACULAR_SETTINGS = {
     "TITLE": "Real Estate API",
     "DESCRIPTION": "Real Estate API",
