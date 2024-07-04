@@ -1,4 +1,5 @@
 import uuid
+
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
 from django.utils import timezone
@@ -26,14 +27,13 @@ class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = _("User")
         verbose_name_plural = _("Users")
-    
+
     def __str__(self):
         return self.username
-    
+
     @property
     def get_full_name(self):
         return f"{self.first_name.title()} {self.last_name.title()}"
-    
+
     def get_short_name(self):
         return self.username
-

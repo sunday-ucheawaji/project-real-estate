@@ -1,8 +1,8 @@
 from django.core.mail import send_mail
-from real_estate.settings.development import DEFAULT_FROM_EMAIL
-from rest_framework import permissions
-from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.views import APIView
+
+from real_estate.settings.development import DEFAULT_FROM_EMAIL
 
 from .models import Enquiry
 
@@ -20,14 +20,11 @@ class SendEnquiryEmailAPIView(APIView):
             from_email = data["email"]
             recipient_list = data[DEFAULT_FROM_EMAIL]
 
-            send_mail(subject, message, from_email, recipient_list,
-                    fail_silently=True)
+            send_mail(subject, message, from_email, recipient_list, fail_silently=True)
 
-            enquiry = Enquiry(name=name, email=email,
-                               subject=subject, message=message)
+            enquiry = Enquiry(name=name, email=email, subject=subject, message=message)
             enquiry.save()
 
             return Response({"success": "Your enquiry was successfully submitted"})
-        except:
+        except Exception:
             return Response({"fail": "Enquiry was not sent. Please try again."})
-

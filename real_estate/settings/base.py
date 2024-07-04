@@ -1,16 +1,19 @@
-import environ
+import logging
+import logging.config
 import os
+from datetime import timedelta
 from pathlib import Path
 
-env = environ.Env(
-    DEBUG=(bool, False)
-)
+import environ
+from django.utils.log import DEFAULT_LOGGING
+
+env = environ.Env(DEBUG=(bool, False))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # environ.Env.read_env(BASE_DIR / "env")
-environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 
 
 # Quick-start development settings - unsuitable for production
@@ -34,7 +37,7 @@ DJANGO_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "django.contrib.sites"
+    "django.contrib.sites",
 ]
 
 SITE_ID = 1
@@ -46,9 +49,9 @@ THIRD_PARTY_APPS = [
     "phonenumber_field",
     "djoser",
     "rest_framework_simplejwt",
-    'drf_yasg',
+    "drf_yasg",
     "corsheaders",
-    'drf_spectacular',
+    "drf_spectacular",
 ]
 
 LOCAL_APPS = [
@@ -57,14 +60,13 @@ LOCAL_APPS = [
     "apps.profiles",
     "apps.ratings",
     "apps.properties",
-    "apps.enquiries"
+    "apps.enquiries",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
-
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -97,8 +99,6 @@ WSGI_APPLICATION = "real_estate.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
-
 
 
 # Password validation
@@ -160,8 +160,7 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
-    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
-
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
 # API Documentation
@@ -173,22 +172,17 @@ SPECTACULAR_SETTINGS = {
     "COMPONENT_SPLIT_REQUEST": True,
 }
 
-from datetime import timedelta
 
 SIMPLE_JWT = {
-    "AUTH_HEADER_TYPES": (
-        "Bearer", "JWT"
-    ),
+    "AUTH_HEADER_TYPES": ("Bearer", "JWT"),
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
     "SIGNING_KEY": env("SIGNING_KEY"),
     "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
     "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
-
-
 }
 
-DJOSER ={
+DJOSER = {
     "LOGIN_FIELD": "email",
     "USER_CREATE_PASSWORD_RETYPE": True,
     "USERNAME_CHANGED_EMAIL_CONFIRMATION": True,
@@ -204,52 +198,43 @@ DJOSER ={
         "user": "apps.users.serializers.UserSerializer",
         "current_user": "apps.users.serializers.UserSerializer",
         "user_delete": "djoser.serializers.UserDeleteSerializer",
-    } 
+    },
 }
-
-
-import logging
-import logging.config
-
-from django.utils.log import DEFAULT_LOGGING
-
 
 logger = logging.getLogger(__name__)
 
 LOG_LEVEL = "INFO"
 
-logging.config.dictConfig({
-    "version": 1,
-    "disable_existing_loggers": False,
-    "formatters": {
-        "console": {
-            "format": "%(asctime)s %(name)-12s %(levelname)-8s %(message)s",
+logging.config.dictConfig(
+    {
+        "version": 1,
+        "disable_existing_loggers": False,
+        "formatters": {
+            "console": {
+                "format": "%(asctime)s %(name)-12s %(levelname)-8s %(message)s",
+            },
+            "file": {
+                "format": "%(asctime)s %(name)-12s %(levelname)-8s %(message)s",
+            },
+            "django.server": DEFAULT_LOGGING["formatters"]["django.server"],
         },
-        "file": {
-            "format": "%(asctime)s %(name)-12s %(levelname)-8s %(message)s",
+        "handlers": {
+            "console": {
+                "class": "logging.StreamHandler",
+                "formatter": "console",
+            },
+            "file": {
+                "level": "INFO",
+                "class": "logging.FileHandler",
+                "formatter": "file",
+                "filename": "logs/real_estate.log",
+            },
+            "django.server": DEFAULT_LOGGING["handlers"]["django.server"],
         },
-        "django.server": DEFAULT_LOGGING["formatters"]["django.server"]
-    },
-    "handlers":{
-        "console": {
-            "class": "logging.StreamHandler", 
-            "formatter": "console",
+        "loggers": {
+            "": {"level": "INFO", "handlers": ["console", "file"], "propagate": False},
+            "apps": {"level": "INFO", "handlers": ["console"], "propagate": False},
+            "django.server": DEFAULT_LOGGING["loggers"]["django.server"],
         },
-        "file":{
-            "level": "INFO",
-            "class": "logging.FileHandler",
-            "formatter": "file",
-            "filename": "logs/real_estate.log"
-        },
-        "django.server": DEFAULT_LOGGING["handlers"]["django.server"]
-    },
-    "loggers":{
-        "":{"level": "INFO", "handlers": ["console", "file"], "propagate": False},
-        "apps":{
-            "level": "INFO", "handlers":["console"], "propagate": False
-        },
-        "django.server": DEFAULT_LOGGING["loggers"]["django.server"]
-
     }
-})
-
+)
