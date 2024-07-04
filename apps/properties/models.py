@@ -104,8 +104,7 @@ class PropertyViews(TimeStampedUUIDModel):
                                  on_delete=models.CASCADE)
     
     def _str__(self):
-        return f"Total views on - {self.property.title} is - {self.property.
-        views} view(s)"
+        return f"Total views on - {self.property.title} is - {self.property.views} view(s)"
     
     class Meta:
         verbose_name = "Total Views on Property"
