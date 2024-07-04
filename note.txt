@@ -19,4 +19,6 @@
 7.  Database design sample
     https://web.archive.org/web/20160308080311/http://www.databaseanswers.org/data_models/
 
-time: 3:33:36
+time: 52:00
+PG_HOST=postgres-db
+PG_HOST=localhost
