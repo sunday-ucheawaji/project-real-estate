@@ -17,6 +17,12 @@ down:
 show-logs:
 	docker compose logs
 
+show-logs-celery:
+	docker compose logs celery_worker
+
+show-logs-flower:
+	docker compose logs flower
+
 migrate:
 	docker compose exec api python3 manage.py migrate
 
