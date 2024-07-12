@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import include, path
 from drf_spectacular.views import (SpectacularAPIView, SpectacularRedocView,
-                                   SpectacularSwaggerView)
+                                   SpectacularSwaggerView, SpectacularJSONAPIView)
 
 urlpatterns = [
     path("supersecret/", admin.site.urls),
@@ -13,6 +13,8 @@ urlpatterns = [
     path("api/v1/ratings/", include("apps.ratings.urls")),
     path("api/v1/enquiries/", include("apps.enquiries.urls")),
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
+    path("api/schema/json/", SpectacularJSONAPIView.as_view(), name="schema"),
+
     # Optional UI:
     path(
         "api/schema/swagger-ui/",
