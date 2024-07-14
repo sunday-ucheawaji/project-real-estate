@@ -28,5 +28,7 @@ django-celery-email==3.0.0
 argh==0.31.2
 PyYAML==6.0.1
 watchdog==4.0.1
+gunicorn==22.0.0
+
 
 
