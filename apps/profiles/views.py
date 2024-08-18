@@ -7,11 +7,13 @@ from .models import Profile
 from .renderers import ProfileJSONRenderer
 from .serializers import ProfileSerializer, UpdateProfileSerializer
 
-
 class AgentListAPIView(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated]
     queryset = Profile.objects.filter(is_agent=True)
     serializer_class = ProfileSerializer
+
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
 
 
 class TopAgentsListAPIView(generics.ListAPIView):

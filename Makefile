@@ -8,8 +8,14 @@ endif
 build:
 	docker compose up --build -d --remove-orphans
 
+build-prod:
+	docker compose -f docker-compose.prod.yml up --build -d --remove-orphans
+
 up:
 	docker compose up -d
+
+up-prod:
+	docker-compose -f docker-compose.prod.yml up -d --build --remove-orphans
 
 down:
 	docker compose down

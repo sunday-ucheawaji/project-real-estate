@@ -17,7 +17,7 @@ DATABASES = {
         "ENGINE": env("POSTGRES_ENGINE"),
         "NAME": env("POSTGRES_DB"),
         "USER": env("POSTGRES_USER"),
-        "PASSWORD": "HOLYBOY",
+        "PASSWORD": env("POSTGRES_PASSWORD"),
         "HOST": env("PG_HOST"),
         "PORT": env("PG_PORT"),
     }
@@ -25,6 +25,8 @@ DATABASES = {
 
 # where the message provider and the celery worker can find the message broker 
 CELERY_BROKER_URL = env("CELERY_BROKER")
-
 CELERY_RESULT_BACKEND = env("CELERY_BACKEND")
 CELERY_TIMEZONE = "Africa/Lagos"
+# CELERY_ACCEPT_CONTENT=['application/json']
+# CELERY_RESULT_SERIALIZER='json'
+# CELERY_TASK_SERIALIZER = 'json'

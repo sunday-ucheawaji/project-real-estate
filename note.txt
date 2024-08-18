@@ -19,6 +19,8 @@
 7.  Database design sample
     https://web.archive.org/web/20160308080311/http://www.databaseanswers.org/data_models/
 
-time: 52:00
-PG_HOST=postgres-db
-PG_HOST=localhost
+8.  Dockerizing Django with Postgres, Gunicorn, and Nginx
+    https://testdriven.io/blog/dockerizing-django-with-postgres-gunicorn-and-nginx/
+
+9.  Web vulnerabilities and security
+    https://portswigger.net/web-security/learning-paths
